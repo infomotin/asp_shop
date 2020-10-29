@@ -1,0 +1,6 @@
+obj
+bin
+# some thing is need for me 
+
+appsettings.json
+*.db
