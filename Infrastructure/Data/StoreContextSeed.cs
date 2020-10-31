@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Infrastructure.Data
 {
     public class StoreContextSeed
     {
+        
         public static async Task SeedAsync(StoreContext context,ILoggerFactory iloggerFactory){
             try
             {
@@ -46,6 +48,10 @@ namespace Infrastructure.Data
                 }
 
 
+            }
+            catch(Exception ex){
+                var logger = iloggerFactory.CreateLogger<StoreContextSeed>();
+                    logger.LogError(ex.Message);
             }
             
         }
