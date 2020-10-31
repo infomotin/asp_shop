@@ -15,7 +15,7 @@ namespace API.Controllers
         // private readonly StoreContext _context;
         private readonly IProductRepository _repository;
         public ProductsController(IProductRepository repository){
-            _repository = repository;
+            _repository = repository; 
         }
         [HttpGet]
         // Sync Method 
