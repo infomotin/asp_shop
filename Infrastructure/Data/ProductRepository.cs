@@ -7,12 +7,13 @@ namespace Infrastructure.Data
 {
     public class ProductRepository:IProductRepository
     {
+        //this is for Data Base Tabale Interface 
         private readonly StoreContext _context;
         public ProductRepository(StoreContext context){
             _context = context;
         }
 
-        
+        //using database table interface to controller data CRUD 
         public async Task<Product> GetProductByIdAsync(int id){
             return await _context.Products
             .Include(p =>p.ProductBrand)
