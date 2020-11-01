@@ -23,7 +23,7 @@ namespace API
                     await StoreContextSeed.SeedAsync(context,loggerFactory);
                 }catch(Exception ex){
                     var logger = loggerFactory.CreateLogger<Program>();
-                    logger.LogError(ex," An Error");
+                    logger.LogError(ex, "An Error");
                 }
 
             }

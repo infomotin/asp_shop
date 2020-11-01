@@ -36,7 +36,7 @@ namespace Infrastructure.Data
 
         public async Task<T> GetEntitiyWithSpac(ISpecifications<T> spec)
         {
-            return await ApplySpecification(spec).FirstOrDefaultAsync();
+            return await ApplySpecification(spec).FirstOrDefaultAsync();   
         }
 
         public async Task<IReadOnlyList<T>> ListAsync(ISpecifications<T> spec)
