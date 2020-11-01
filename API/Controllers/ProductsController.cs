@@ -48,17 +48,17 @@ namespace API.Controllers
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id){   
-            return await _repository.GetProductByIdAsync(id);
+            return await _productsRepo.GetByIdAsync(id);
         }
 
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands() {
-            return Ok(await _repository.GetBrandsAsync());
+            return Ok(await _ProductBrandRepo.ListAllAsync());
         }
 
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes() {
-            return Ok(await _repository.GetTypesAsync());
+            return Ok(await _ProductTypeRepo.ListAllAsync());
         }
     }
 }

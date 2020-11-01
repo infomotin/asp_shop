@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
 namespace Infrastructure.Data
 {
     public class ProductRepository:IProductRepository
@@ -20,7 +22,19 @@ namespace Infrastructure.Data
             .Include(p =>p.ProductType)
             .FirstOrDefaultAsync(p =>p.id == id);
         }
+
+        //     public async Task<IReadOnlyList<Product>> GetProductsAsync(){
+            
+        //     return await _context.Products
+        //     .Include(p =>p.ProductBrand)
+        //     .Include(p =>p.ProductType)
+        //     .ToListAsync();
+        // }
+
         public async Task<IReadOnlyList<Product>> GetProductsAsync(){
+
+            // var typeId = 1;
+            // var product = _context.Products.Where(x =>x.ProductTypeId == typeId);
             return await _context.Products
             .Include(p =>p.ProductBrand)
             .Include(p =>p.ProductType)
