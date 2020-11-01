@@ -34,17 +34,18 @@ namespace Infrastructure.Data
 
 //news adding this functins 
 
-        public Task<T> GetEntitiyWithSpac(ISpecifications<T> spec)
+        public async Task<T> GetEntitiyWithSpac(ISpecifications<T> spec)
         {
-            throw new System.NotImplementedException();
+            return await ApplySpecification(spec).FirstOrDefaultAsync();
         }
 
-        public Task<IReadOnlyList<T>> ListAsync(ISpecifications<T> spec)
+        public async Task<IReadOnlyList<T>> ListAsync(ISpecifications<T> spec)
         {
-            throw new System.NotImplementedException();
+            return await ApplySpecification(spec).ToListAsync();
         }
 
         private IQueryable<T> ApplySpecification(ISpecifications<T> spec){
             return SpecificationEvaluator<T>.GetQueryable(_context.Set<T>().AsQueryable(),spec);
+            }
     }
 }

@@ -10,7 +10,7 @@ namespace Infrastructure.Data
         public static IQueryable<TEntity> GetQueryable(IQueryable<TEntity> inputQuery, ISpecifications<TEntity> spec){
             var query = inputQuery;
             if(spec.Criteria !=null){
-                query = query.Where(spec.Criteria);
+                query = query.Where(spec.Criteria); // in excutions p => p.ProductTypeId == id (lamda expression )
             }
             // to be as like same Working With this fun .Include(p =>p.ProductBrand)
             //.Include(p =>p.ProductType)
