@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Core.Specifications;
+
 namespace API.Controllers
 {
     [ApiController]
@@ -45,7 +47,10 @@ namespace API.Controllers
         public async Task<ActionResult<List<Product>>> GetProducts(){
             //implements IGeneric Class method using on this ends point
             // var products =await _productsRepo.ListAllAsync();
-            var products =await _productsRepo.ListAsync();
+            //caling Product witht type and Brand Class  for pussing This type Working 
+            var spec = new ProductsWithTypeAndBrandSpecification();
+
+            var products =await _productsRepo.ListAsync(spec);
             return Ok(products);   
         }
 
