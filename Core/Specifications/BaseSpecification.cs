@@ -6,9 +6,9 @@ namespace Core.Specifications
 {
     public class BaseSpecification<T> : ISpecifications<T>
     {
-        public Expression<Func<T, bool>> Criteria => throw new NotImplementedException();
+        public Expression<Func<T, bool>> Criteria {get;}
 
-        public List<Expression<Func<T, object>>> include => throw new NotImplementedException();
+        public List<Expression<Func<T, object>>> include {get;}= new List<Expression<Func<T, object>>>();
     }
 
-}
+}  
