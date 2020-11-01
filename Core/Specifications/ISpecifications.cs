@@ -11,6 +11,6 @@ namespace Core.Specifications
         //  Sentext :Exprations <Func<T,bool>Query>>
 
         Expression<Func<T,bool>> Criteria {get;}
-        List<Expression<Func<T,object>>> include{get;}
+        List<Expression<Func<T,object>>> Include{get;}
     }
 }
