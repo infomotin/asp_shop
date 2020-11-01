@@ -6,6 +6,12 @@ namespace Core.Specifications
 {
     public class BaseSpecification<T> : ISpecifications<T>
     {
+        //interface are Generating at first as like class 
+        public BaseSpecification(Expression<Func<T, bool>> criteria)
+        {
+            Criteria = criteria;
+        }
+
         public Expression<Func<T, bool>> Criteria {get;}
 
         public List<Expression<Func<T, object>>> Includes {get;}= 

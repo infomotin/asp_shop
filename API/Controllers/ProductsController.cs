@@ -32,7 +32,6 @@ namespace API.Controllers
         }
 
 
-        [HttpGet]
         // Sync Method 
         // public ActionResult<List<Product>> GetProducts(){
         //     var products = _context.Products.ToList();
@@ -41,20 +40,29 @@ namespace API.Controllers
 
 
         // async Version 
+        
+        [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts(){
-            var products =await _productsRepo.ListAllAsync();
+            //implements IGeneric Class method using on this ends point
+            // var products =await _productsRepo.ListAllAsync();
+            var products =await _productsRepo.ListAsync();
             return Ok(products);   
         }
+
+
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id){   
             return await _productsRepo.GetByIdAsync(id);
         }
 
+
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands() {
             return Ok(await _ProductBrandRepo.ListAllAsync());
         }
+
 
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes() {

@@ -11,6 +11,9 @@ namespace Core.Interfaces
          Task<IReadOnlyList<T>> ListAllAsync();
         //  Task<IReadOnlyList<T>> ListAllProductBrand();
 
+        // Adding for Igeneric Class Interface 
+
+        
         Task<T> GetEntitiyWithSpac(ISpecifications<T> spec);
         Task<IReadOnlyList<T>> ListAsync(ISpecifications<T> spec);
     }
