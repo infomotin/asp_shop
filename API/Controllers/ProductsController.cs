@@ -86,18 +86,20 @@ namespace API.Controllers
 
             // return await _productsRepo.GetEntitiyWithSpac(spec);
             var product = await _productsRepo.GetEntitiyWithSpac(spec);
-            return new ProductToReturnDto
-            {
-                Id = product.id,
-                Name = product.Name,
-                Description = product.Description,
-                PictureUrl = product.PictureUrl,
-                Price = product.Price,
-                ProductBrand = product.ProductBrand.Name,
-                ProductType = product.ProductType.Name
+            //[peoduct] is mamory and its mapping with helping mapping calss with based on ProductToDoi class 
+            return _mapper.Map<Product,ProductToReturnDto>(product);
+            // return new ProductToReturnDto
+            // {
+            //     Id = product.id,
+            //     Name = product.Name,
+            //     Description = product.Description,
+            //     PictureUrl = product.PictureUrl,
+            //     Price = product.Price,
+            //     ProductBrand = product.ProductBrand.Name,
+            //     ProductType = product.ProductType.Name
 
 
-            };
+            // };
         }
 
 
