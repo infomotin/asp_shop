@@ -60,17 +60,21 @@ namespace API.Controllers
             var products = await _productsRepo.ListAsync(spec);
             //all return data are save in current context at the memory address at [products] then 
             //slelect one product and rearange this data with productretundto class finaly retun a list 
-            return products.Select(product => new ProductToReturnDto
-            {
-                Id = product.id,
-                Name = product.Name,
-                Description = product.Description,
-                PictureUrl = product.PictureUrl,
-                Price = product.Price,
-                ProductBrand = product.ProductBrand.Name,
-                ProductType = product.ProductType.Name
-            }).ToList();
+            // return products.Select(product => new ProductToReturnDto
+            // {
+            //     Id = product.id,
+            //     Name = product.Name,
+            //     Description = product.Description,
+            //     PictureUrl = product.PictureUrl,
+            //     Price = product.Price,
+            //     ProductBrand = product.ProductBrand.Name,
+            //     ProductType = product.ProductType.Name
+            // }).ToList();
             // return Ok(products);   
+
+            // in the Map{first part orginal result[db part] , convartede result what we want to see Based on design class}
+            return Ok(_mapper
+                        .Map< IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
         }
 
 
