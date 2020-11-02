@@ -12,11 +12,20 @@ namespace API.Errors
 
         private string GetDefaultMessageStatusCode(int statusCode)
         {
+            
+            // return switch (statusCode)
+            // {
+            //     case 400:
+                    
+
+
+            //     default:
+            // }
             return statusCode switch 
             {
                 400 => "A bad request to make you ",
                 401 => "401",
-                404 => "Not Found",
+                404 => "Not Found Vaolo Kore Khug ??",
                 500 => "Server Error",
                 _ => null,
                 

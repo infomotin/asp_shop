@@ -43,11 +43,13 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            //using for Error Status Code place holder positions "/error/{0}" 
+            // if any request come into api but dont any end poit asinge to them ,then request go error helldeler 
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            
+            //For Using Static File As HTML Public Like Django 
             app.UseStaticFiles();
 
             app.UseAuthorization();

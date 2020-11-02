@@ -10,6 +10,15 @@ using Core.Specifications;
 using API.Dtos;
 using AutoMapper;
 
+
+// ApiController  ProductsController : BaseApiController : ControllerBase inherited in serige 
+// another BuggyController : BaseApiController inherited in serige 
+// ErrorController : BaseApiController 
+
+
+
+
+
 namespace API.Controllers
 {
     // For Implemiting with BaseApiController 
