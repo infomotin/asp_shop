@@ -50,9 +50,9 @@ namespace API.Controllers
         // async Version 
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts()
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
         {
-            //implements IGeneric Class method using on this ends point
+            //implements IGeneric Class method using on this ends point 
             // var products =await _productsRepo.ListAllAsync();
             //caling Product witht type and Brand Class  for pussing This type Working 
             var spec = new ProductsWithTypeAndBrandSpecification();
