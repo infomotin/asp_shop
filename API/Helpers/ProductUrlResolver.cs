@@ -8,6 +8,8 @@ namespace API.Helpers
     public class ProductUrlResolver : IValueResolver<Product, ProductToReturnDto, string>
     {
         private readonly IConfiguration _config;
+        //to access project setting json API file using Microsoft.Extensions.Configuration; interface IConfiguration 
+        //like appsettings.Developer.json 
         public ProductUrlResolver(IConfiguration config)
         {
            _config = config;
