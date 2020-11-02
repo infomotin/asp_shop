@@ -8,6 +8,7 @@ using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Core.Specifications;
 using API.Dtos;
+using AutoMapper;
 
 namespace API.Controllers
 {
@@ -15,7 +16,7 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        
+
 
         // private readonly StoreContext _context;
         // private readonly IProductRepository _repository;
@@ -25,13 +26,17 @@ namespace API.Controllers
         private readonly IGenericRepository<Product> _productsRepo;
         private readonly IGenericRepository<ProductBrand> _ProductBrandRepo;
         private readonly IGenericRepository<ProductType> _ProductTypeRepo;
+        private readonly IMapper _mapper;
 
-        public ProductsController (IGenericRepository<Product> productsRepo, 
-                                    IGenericRepository<ProductBrand> ProductBrandRepo, 
-                                    IGenericRepository<ProductType>  ProductTypeRepo){
+        public ProductsController(IGenericRepository<Product> productsRepo,
+                                    IGenericRepository<ProductBrand> ProductBrandRepo,
+                                    IGenericRepository<ProductType> ProductTypeRepo, IMapper mapper)
+        {
+            
             _productsRepo = productsRepo;
             _ProductBrandRepo = ProductBrandRepo;
             _ProductTypeRepo = ProductTypeRepo;
+            _mapper = mapper;
         }
 
 
@@ -43,18 +48,20 @@ namespace API.Controllers
 
 
         // async Version 
-        
+
         [HttpGet]
-        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts(){
+        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts()
+        {
             //implements IGeneric Class method using on this ends point
             // var products =await _productsRepo.ListAllAsync();
             //caling Product witht type and Brand Class  for pussing This type Working 
             var spec = new ProductsWithTypeAndBrandSpecification();
 
-            var products = await _productsRepo.ListAsync(spec); 
+            var products = await _productsRepo.ListAsync(spec);
             //all return data are save in current context at the memory address at [products] then 
             //slelect one product and rearange this data with productretundto class finaly retun a list 
-            return products.Select(product => new ProductToReturnDto{
+            return products.Select(product => new ProductToReturnDto
+            {
                 Id = product.id,
                 Name = product.Name,
                 Description = product.Description,
@@ -71,14 +78,16 @@ namespace API.Controllers
 
         [HttpGet("{id}")]
         //Lecture 40 are goods Descriptions 
-            public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id){  
+        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
+        {
 
             var spec = new ProductsWithTypeAndBrandSpecification(id);
 
 
             // return await _productsRepo.GetEntitiyWithSpac(spec);
             var product = await _productsRepo.GetEntitiyWithSpac(spec);
-            return new ProductToReturnDto {
+            return new ProductToReturnDto
+            {
                 Id = product.id,
                 Name = product.Name,
                 Description = product.Description,
@@ -93,13 +102,15 @@ namespace API.Controllers
 
 
         [HttpGet("brands")]
-        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands() {
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
+        {
             return Ok(await _ProductBrandRepo.ListAllAsync());
         }
 
 
         [HttpGet("types")]
-        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes() {
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
+        {
             return Ok(await _ProductTypeRepo.ListAllAsync());
         }
     }
