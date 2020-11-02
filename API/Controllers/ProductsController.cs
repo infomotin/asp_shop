@@ -45,14 +45,23 @@ namespace API.Controllers
         // async Version 
         
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts(){
+        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts(){
             //implements IGeneric Class method using on this ends point
             // var products =await _productsRepo.ListAllAsync();
             //caling Product witht type and Brand Class  for pussing This type Working 
             var spec = new ProductsWithTypeAndBrandSpecification();
 
-            var products =await _productsRepo.ListAsync(spec); 
-            return Ok(products);   
+            var products = await _productsRepo.ListAsync(spec); 
+            return products.Select(product => new ProductToReturnDto{
+                Id = product.id,
+                Name = product.Name,
+                Description = product.Description,
+                PictureUrl = product.PictureUrl,
+                Price = product.Price,
+                ProductBrand = product.ProductBrand.Name,
+                ProductType = product.ProductType.Name
+            }).ToList();
+            // return Ok(products);   
         }
 
 
