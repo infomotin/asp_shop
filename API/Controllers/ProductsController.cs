@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Core.Specifications;
+using API.Dtos;
 
 namespace API.Controllers
 {
@@ -59,12 +60,24 @@ namespace API.Controllers
 
         [HttpGet("{id}")]
         //Lecture 40 are goods Descriptions 
-            public async Task<ActionResult<Product>> GetProduct(int id){  
+            public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id){  
 
             var spec = new ProductsWithTypeAndBrandSpecification(id);
 
 
-            return await _productsRepo.GetEntitiyWithSpac(spec);
+            // return await _productsRepo.GetEntitiyWithSpac(spec);
+            var product = await _productsRepo.GetEntitiyWithSpac(spec);
+            return new ProductToReturnDto {
+                Id = product.id,
+                Name = product.Name,
+                Description = product.Description,
+                PictureUrl = product.PictureUrl,
+                Price = product.Price,
+                ProductBrand = product.ProductBrand.Name,
+                ProductType = product.ProductType.Name
+
+
+            };
         }
 
 
