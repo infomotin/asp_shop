@@ -52,6 +52,8 @@ namespace API.Controllers
             var spec = new ProductsWithTypeAndBrandSpecification();
 
             var products = await _productsRepo.ListAsync(spec); 
+            //all return data are save in current context at the memory address at [products] then 
+            //slelect one product and rearange this data with productretundto class finaly retun a list 
             return products.Select(product => new ProductToReturnDto{
                 Id = product.id,
                 Name = product.Name,
