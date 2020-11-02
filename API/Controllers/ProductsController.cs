@@ -12,9 +12,10 @@ using AutoMapper;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+    // For Implemiting with BaseApiController 
+    // [ApiController]
+    // [Route("api/[controller]")]
+    public class ProductsController : BaseApiController
     {
 
 
