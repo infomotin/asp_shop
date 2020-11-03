@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using System.Net;
 using API.Errors;
+using System.Text.Json;
 
 namespace API.Middleware
 {
@@ -36,7 +37,15 @@ namespace API.Middleware
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 //ApiException is an have peremitter with value initialize ing 
-                var response = _env.IsDevelopment() ? new ApiException((int)HttpStatusCode.InternalServerError,ex.Message,ex.StackTrace.ToString());
+                var response = _env.IsDevelopment() 
+                ? new ApiException((int)HttpStatusCode.InternalServerError,ex.Message,ex.StackTrace.ToString())
+                : new ApiException((int)HttpStatusCode.InternalServerError);
+                //namig Conversitons 
+                var options = new JsonSerializerOptions{PropertyNamingPolicy=JsonNamingPolicy.CamelCase};
+                //now send this respons 
+                var json = JsonSerializer.Serialize(response,options);
+
+                await context.Response.WriteAsync(json);
                 
             }
         }

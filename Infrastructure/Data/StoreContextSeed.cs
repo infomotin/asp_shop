@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Entities;
 using Microsoft.Extensions.Logging;
-
+// this class are using for data insert with json formate 
 namespace Infrastructure.Data
 {
     public class StoreContextSeed

@@ -8,6 +8,7 @@ using Infrastructure.Data;
 using Core.Interfaces;
 using AutoMapper;
 using API.Helpers;
+using API.Middleware;
 
 namespace API
 {
@@ -39,11 +40,13 @@ namespace API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            //using for Error Status Code place holder positions "/error/{0}" 
+            // if (env.IsDevelopment())
+            // {
+            //     app.UseDeveloperExceptionPage();
+            // }
+            //adding middlware that are describe on Errors folder Class 
+            app.UseMiddleware<ExceptionMiddleware>();
+            // //using for Error Status Code place holder positions "/error/{0}" 
             // if any request come into api but dont any end poit asinge to them ,then request go error helldeler 
             app.UseStatusCodePagesWithReExecute("/error/{0}");
             app.UseHttpsRedirection();
