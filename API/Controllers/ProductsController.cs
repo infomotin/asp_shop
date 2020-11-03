@@ -11,7 +11,7 @@ using API.Dtos;
 using AutoMapper;
 
 
-// ApiController  ProductsController : BaseApiController : ControllerBase inherited in serige 
+// ApiController  ProductsController : BaseApiController : ControllerBase inherited in serige [extends]
 // another BuggyController : BaseApiController inherited in serige 
 // ErrorController : BaseApiController 
 
