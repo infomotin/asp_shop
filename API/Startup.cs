@@ -9,6 +9,9 @@ using Core.Interfaces;
 using AutoMapper;
 using API.Helpers;
 using API.Middleware;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using API.Errors;
 
 namespace API
 {
@@ -35,6 +38,21 @@ namespace API
             services.AddControllers();
             //this services for database class 
             services.AddDbContext<StoreContext>(x => x.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
+            // Error Exception hendeller With Options 
+            services.Configure<ApiBehaviorOptions>(options =>{
+                options.InvalidModelStateResponseFactory = actionContext => {
+                    var error = actionContext.ModelState
+                    .Where(e => e.Value.Errors.Count >0)
+                    .SelectMany(x => x.Value.Errors)
+                    .Select(x => x.ErrorMessage).ToArray();
+
+                    var errorResponse = new ApiValidationsErrorRespons{
+                        Error = error
+                    };
+                    return new BadRequestObjectResult(errorResponse);
+                };
+            });
+            services.AddSwaggerGen(c => c.SwaggerDoc("V1", new Microsoft.OpenApi.Models.OpenApiInfo {Title = "Skinet API", Version ="V1"}));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +74,11 @@ namespace API
             app.UseStaticFiles();
 
             app.UseAuthorization();
-
+            //for pop up libray 
+            app.UseSwagger();
+            // which url are are Shoing pop up Message '
+            app.UseSwaggerUI(c => {c.SwaggerEndpoint("/swagger/v1/swagger.json","Swagger API V1");});
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
